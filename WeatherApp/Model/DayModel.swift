@@ -17,8 +17,13 @@ struct DayModel: Decodable {
     
     struct Weather: Decodable {
         let main: String
-        let description: String
+        let descriptionWeather: String
+        enum CodingKeys : String, CodingKey {
+            case main
+            case descriptionWeather = "description"
+        }
     }
+    
     
     struct Wind: Decodable {
         let speed: Double

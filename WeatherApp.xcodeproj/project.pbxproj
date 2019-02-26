@@ -17,6 +17,7 @@
 		67BDB0F4222467B100D4FBC5 /* DayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BDB0F3222467B100D4FBC5 /* DayModel.swift */; };
 		67BDB0F722247BD700D4FBC5 /* CustomDayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BDB0F522247BD700D4FBC5 /* CustomDayTableViewCell.swift */; };
 		67BDB0F822247BD700D4FBC5 /* CustomDayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BDB0F622247BD700D4FBC5 /* CustomDayTableViewCell.xib */; };
+		67BDB0FB2225109400D4FBC5 /* DetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BDB0FA2225109400D4FBC5 /* DetailTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		67BDB0F3222467B100D4FBC5 /* DayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayModel.swift; sourceTree = "<group>"; };
 		67BDB0F522247BD700D4FBC5 /* CustomDayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDayTableViewCell.swift; sourceTree = "<group>"; };
 		67BDB0F622247BD700D4FBC5 /* CustomDayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomDayTableViewCell.xib; sourceTree = "<group>"; };
+		67BDB0FA2225109400D4FBC5 /* DetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +105,6 @@
 		67BDB0C02224647200D4FBC5 /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				67BDB0C12224647200D4FBC5 /* AppDelegate.swift */,
 				67BDB0CD2224647500D4FBC5 /* Info.plist */,
 				67BDB0F22224674000D4FBC5 /* Model */,
 				67BDB0EF2224660600D4FBC5 /* Controller */,
@@ -134,7 +135,9 @@
 		67BDB0EF2224660600D4FBC5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				67BDB0C12224647200D4FBC5 /* AppDelegate.swift */,
 				67BDB0C32224647200D4FBC5 /* WeatherViewController.swift */,
+				67BDB0FA2225109400D4FBC5 /* DetailTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67BDB0F4222467B100D4FBC5 /* DayModel.swift in Sources */,
+				67BDB0FB2225109400D4FBC5 /* DetailTableViewController.swift in Sources */,
 				67BDB0C42224647200D4FBC5 /* WeatherViewController.swift in Sources */,
 				67BDB0C22224647200D4FBC5 /* AppDelegate.swift in Sources */,
 				67BDB0F722247BD700D4FBC5 /* CustomDayTableViewCell.swift in Sources */,

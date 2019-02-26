@@ -11,13 +11,13 @@ import UIKit
 class WeatherViewController: UIViewController {
 
     var dataAPI : DataAPI?
+    var arrayMiddleOfDay = [DayModel]()
     @IBOutlet weak var tableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //tableView.register(UINib(nibName: "CustomDayTableViewCell", bundle: nil), forCellReuseIdentifier: "cellId")
         configureTableView()
         fetchJSON()
     }
@@ -37,6 +37,7 @@ class WeatherViewController: UIViewController {
                 do {
                     let decoder = JSONDecoder()
                     self.dataAPI = try decoder.decode(DataAPI.self, from: data)
+                    self.createMiddleOfDay()
                     self.tableView.reloadData()
                 }catch let jsonErr {
                     print("Failed to decode:", jsonErr)
@@ -48,22 +49,40 @@ class WeatherViewController: UIViewController {
     func configureTableView(){
         tableView.rowHeight = 60.0
     }
+    
+    func createMiddleOfDay(){
+        guard let arrayDays = dataAPI?.list else {return}
+        for day in arrayDays {
+            if day.dt_txt.suffix(8) == "12:00:00" {
+                arrayMiddleOfDay.append(day)
+            }
+        }
+    }
+    
+    func createDetailedDay(dayString:String)->[DayModel]{
+        var detailArray = [DayModel]()
+        if let arrayDays = dataAPI?.list {
+            for day in arrayDays {
+                if day.dt_txt.prefix(10) == dayString {
+                    detailArray.append(day)
+                }
+            }
+        }
+        return detailArray
+    }
 }
-//Mark: TableView Data source
+//Mark: TableView Data source and delegate
 
 extension WeatherViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let dataAPI = dataAPI?.list.count else {
-            return 1
-        }
-        return dataAPI
+        return arrayMiddleOfDay.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) //as! CustomDayTableViewCell
-        cell.textLabel?.text = dataAPI?.list[indexPath.row].weather[0].description
-        cell.detailTextLabel?.text = dataAPI?.list[indexPath.row].dt_txt ?? "No Data"
-        if dataAPI?.list[indexPath.row].weather[0].main == "Rain" {
+        cell.textLabel?.text = arrayMiddleOfDay[indexPath.row].weather[0].descriptionWeather
+        cell.detailTextLabel?.text = arrayMiddleOfDay[indexPath.row].dt_txt
+        if arrayMiddleOfDay[indexPath.row].weather[0].main == "Rain" {
             cell.imageView?.image = UIImage(named: "rain")
         }else{
             cell.imageView?.image = UIImage(named: "clear")
@@ -71,5 +90,17 @@ extension WeatherViewController:UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       //performSegue(withIdentifier: "GoToDetails", sender: self)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! DetailTableViewController
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.detailedDay = createDetailedDay(dayString: String(arrayMiddleOfDay[indexPath.row].dt_txt.prefix(10)))
+        }
+        
+    }
     
 }

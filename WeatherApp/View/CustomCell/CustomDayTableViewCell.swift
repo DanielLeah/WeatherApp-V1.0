@@ -10,11 +10,13 @@ import UIKit
 
 class CustomDayTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var imagedDetails: UIImageView!
     
-    @IBOutlet weak var imageViewWeatherType: UIImageView!
+    @IBOutlet weak var labelHumidity: UILabel!
+    @IBOutlet weak var labelDate: UILabel!
     
-    @IBOutlet weak var descriptionLabel: UILabel!
-    
+    @IBOutlet weak var labelTempreture: UILabel!
+    @IBOutlet weak var labelDescription: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
